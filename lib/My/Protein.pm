@@ -47,13 +47,17 @@ has domains => (
   default => sub { [] },
 );
 
+#subroutine for getting domain by id
 sub get_domain_by_id {
+  #@_?
   my ($self, $id) = @_;
+  # find_domain?
   my ($domain) = $self->find_domain( sub { $_->domain_id eq $id } );
   return $domain;
 }
 
 sub list_all_domain_segments {
+ #shift - remove the first element of an array, and return it 
   my $self = shift;
   my @segments;
   for my $dom ( $self->list_domains ) {
