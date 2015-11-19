@@ -1,29 +1,40 @@
+#package - declare a separate global namespace 
 package My::Protein;
 
+#use - load a module, moose extension for object orientated programing
 use Moose;
+#moosex?
 use MooseX::Params::Validate;
 use My::Domain;
+#carp?
 use Carp qw/ croak /;
 
+#sequence, is read only, is a string
 has sequence => (
   is => 'ro',
   isa => 'Str',
 );
 
+#md5, is read only, is a string
 has md5 => (
   is => 'ro',
   isa => 'Str',
 );
 
+
+#sequence length, is read only, is a number
 has sequence_length => (
   is => 'ro',
   isa => 'Num',
 );
 
+#domains, is read only, is an array , Array reference is [My::Domain]
 has domains => (
   traits => ['Array'],
   is => 'ro',
+#arrayref?  
   isa => 'ArrayRef[My::Domain]',
+  #handles: extra commands
   handles => {
     add_domain    => 'push',
     get_domain    => 'get',
@@ -31,6 +42,8 @@ has domains => (
     count_domains => 'count',
     find_domain   => 'first',
   },
+  
+  #sub?
   default => sub { [] },
 );
 
